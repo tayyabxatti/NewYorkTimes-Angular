@@ -1,0 +1,48 @@
+ <div class="row">
+  <div  *ngFor="let item of obj_news_response.results" class="col-4 mb-4">
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{item.title }}</mat-card-title>
+    <mat-card-subtitle>{{item.subsection}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-carousel
+  timings="250ms ease-in"
+  [autoplay]="true"
+  interval="5000"
+  color="accent"
+  maxWidth="400px"
+  proportion="25"
+  slides="5"
+  [loop]="true"
+  [hideArrows]="true"
+  [hideIndicators]="true"
+  [useKeyboard]="true"
+  [useMouseWheel]="false"
+  orientation="ltr"
+>
+
+  <mat-carousel-slide
+    #matCarouselSlide
+    *ngFor="let slide of item.multimedia; let i = index"
+    [image]="slide.url"
+    overlayColor="#00000040"
+    [hideOverlay]="false"
+  ></mat-carousel-slide>
+</mat-carousel>
+  <!-- <img mat-card-image src="{{item.multimedia ? item.multimedia[0].url : ''}}" height="204px" > -->
+  <mat-card-content>
+    <p>
+      {{ item.abstract }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="loadDetails(item)" mat-raised-button color="accent">Details</button>
+  </mat-card-actions>
+</mat-card>
+</div>
+</div> 
+ 
+
+
+

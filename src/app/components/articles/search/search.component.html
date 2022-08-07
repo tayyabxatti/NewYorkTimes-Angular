@@ -1,0 +1,118 @@
+
+<form [formGroup]="filterForm" (submit)="onSearchArticles(filterForm)" >
+    <mat-card>
+      <mat-card-title class="text-center">NY Times</mat-card-title>
+      <mat-card-subtitle class="text-center">Search Filters</mat-card-subtitle>
+      <div class="row">
+        <mat-form-field class="col-6" appearance="fill">
+          <mat-label>begin_date</mat-label>
+          <input matInput formControlName="begin_Date" type="text">
+        </mat-form-field>
+        <mat-form-field class="col-6" appearance="fill">
+          <mat-label>end_date</mat-label>
+          <input matInput formControlName="end_Date" type="text">
+        </mat-form-field>
+        <mat-form-field class="col-6" appearance="fill">
+          <mat-label>facet</mat-label>
+          <mat-select formControlName="facet">
+            <mat-option value="true"> true </mat-option>
+            <mat-option value="false"> false </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-6" appearance="fill">
+          <mat-label>facet_fields</mat-label>
+          <mat-select formControlName="facet_Fields">
+            <mat-option value="day_of_week"> day_of_week </mat-option>
+            <mat-option value="document_type"> document_type </mat-option>
+            <mat-option value="ingredients"> ingredients </mat-option>
+            <mat-option value="news_desk"> news_desk </mat-option>
+            <mat-option value="pub_month"> pub_month </mat-option>
+            <mat-option value="pub_year"> pub_year </mat-option>
+            <mat-option value="section_name"> section_name </mat-option>
+            <mat-option value="source"> source </mat-option>
+            <mat-option value="subsection_name"> subsection_name </mat-option>
+            <mat-option value="type_of_material"> type_of_material </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-6" appearance="fill">
+          <mat-label>facet_filter</mat-label>
+          <mat-select formControlName="facet_Filter">
+            <mat-option value="true"> true </mat-option>
+            <mat-option value="false"> false </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-6" appearance="fill">
+          <mat-label>fl</mat-label>
+          <input matInput formControlName="fl" type="text">
+        </mat-form-field>
+        <mat-form-field class="col-6" appearance="fill">
+          <mat-label>fq</mat-label>
+          <input matInput formControlName="fq" type="text">
+        </mat-form-field>
+        <mat-form-field class="col-6" appearance="fill">
+          <mat-label>page</mat-label>
+          <input matInput formControlName="page" type="text">
+        </mat-form-field>
+        <mat-form-field class="col-6" appearance="fill">
+          <mat-label>q</mat-label>
+          <input matInput formControlName="q" type="text">
+        </mat-form-field>
+        <mat-form-field class="col-6" appearance="fill">
+          <mat-label>sort</mat-label>
+          <mat-select formControlName="sort">
+            <mat-option value="newest"> newest </mat-option>
+            <mat-option value="oldest"> oldest </mat-option>
+            <mat-option value="relevance"> relevance </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-card-actions class="text-center">
+        <button (click)="resetForm()" type="button" mat-raised-button color="accent">
+          <mat-icon>clear</mat-icon>
+          Reset
+        </button>
+        <button type="submit"  mat-raised-button color="primary">
+          <mat-icon>search</mat-icon>
+          Search
+        </button>
+      </mat-card-actions>
+      <div class="clearfix">
+      </div>
+    </mat-card>
+  </form>
+  
+
+
+
+  <div class="row">
+    <div  *ngFor="let item of dataSource" class="col-4 mb-3">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>
+        {{ (item.abstract?.length > 40)? (item.abstract | slice:0:40)+'..':(article.abstract) }}
+      </mat-card-title>
+      <mat-card-subtitle>{{item.section_name}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://static01.nyt.com/{{item.multimedia ? item.multimedia[0]?.url : ''}}" height="204px">
+    <mat-card-content>
+      <p>
+        {{ (item.snippet?.length > 110)? (item.snippet | slice:0:110)+'..':(item.snippet) }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- <button (click)="openDialog(item)" mat-raised-button color="accent">Read more ...</button> -->
+    </mat-card-actions>
+  </mat-card>
+</div>
+</div>
+<div *ngIf="length>0">
+<mat-paginator #paginator
+[length]="length"
+[pageSize]="pageSize"
+[pageSizeOptions]="[5, 10, 25, 100]"
+[pageIndex]="pageIndex"
+[showFirstLastButtons]="true"
+aria-label="Select page"
+(page)="getServerData($event)">
+</mat-paginator>
+</div>

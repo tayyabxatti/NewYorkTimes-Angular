@@ -1,0 +1,31 @@
+<div mat-dialog-content>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{ item.title }}
+        </mat-card-title>
+        <mat-card-subtitle>{{item.section}}</mat-card-subtitle>
+      </mat-card-header>
+      
+      <img mat-card-image src="{{item.multimedia ? item.multimedia[0].url : ''}}" width="300px" height="300px" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          {{ item.abstract }}
+        </p>
+  
+      
+      </mat-card-content>
+      <mat-card-footer>
+        <div class="row">
+          <div class="col-3">Created Date: {{ item.created_date | date: 'yyyy/MM/dd' }}</div>
+          <div class="col-3">Updated Date: {{ item.updated_date | date: 'yyyy/MM/dd' }}</div>
+          <div class="col-3">Published Date: {{ item.published_date | date: 'yyyy/MM/dd' }}</div>
+        </div>
+  
+      </mat-card-footer>
+    </mat-card>
+  </div>
+  <div mat-dialog-actions class="justify-content-center">
+    <button mat-raised-button color="secondary" (click)="closeDialog()">Close</button>
+  </div>
+  
