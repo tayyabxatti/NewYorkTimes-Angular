@@ -1,3 +1,7 @@
+# How to run project:
+ 1. open powershell and run $ npm install
+ 2. run $ ng serve
+
 # NewsletterClient
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.4.
